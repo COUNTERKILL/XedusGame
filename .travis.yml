@@ -17,4 +17,6 @@ install:
 #before_script:
 
 # command to run tests
-script: python -m test.test_all_of_the_units
+script:
+python -m test.test_all_of_the_units
+python -m test.test_inifle
