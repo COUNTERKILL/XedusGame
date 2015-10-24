@@ -1,5 +1,5 @@
 import sfml as sf
-
+import IniFile as ini
 TYPE_INTERACTION_PHYSICAL=0
 TYPE__INTERACTION_VISUAL=1
 TYPE__LOGIC_IMPASSABLE_AREA=0
@@ -19,23 +19,32 @@ class Position:
         return strx+' '+stry
         
 class Object(sf.Drawable):
-    def __init__(self,texture,width,height):
+    def __init__(self,texturepath,width,height):
         self.width=width
         self.height=height
-        self.texture=texture
+        self.sprite=sf.Sprite(sf.Texture.from_file(texturepath))
         sf.Drawable.__init__(self)
     position=Position(0,0)
     obj_id=None
     type_interatction=None
     type_logic=None
-    texture=sf.Texture
+    sprite=None   
+    def loadfromfile(filepath):
+        load=IniFile(filepath)
+        self.width=load.ReadString(Object,width)
+        self.height=load.ReadString(Object,height)
+        self.sprite=load.ReadString(Object,sprite)
+        self.type_interaction=load.ReadInt(Object,type_interaction)
+        self.type_logic=load.ReadInt(Object,type_logic)
+        pass
     def setposition(self,pos):
         self.position=pos;
     def getposition(self):
         return self.position
     def draw(self, target, states):
-        sprite=sf.Sprite(self.texture)
-        sprite.position=sf.Vector2(self.width,self.height)
-        target.draw(sprite,states)
+        self.sprite.position=sf.Vector2(self.position.x,self.position.y)
+        self.sprite.texture_rectangle=sf.Rectangle((self.position.x,self.position.y),
+                                            (self.width,self.height))
+        target.draw(self.sprite,states)
 
 
