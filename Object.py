@@ -33,10 +33,5 @@ class Object(sf.Drawable):
         self.position=pos;
     def getposition(self):
         return self.position
-texture = sf.Texture.from_file("D:\Downloads\image.jpg")
-m1=Object(texture,450,450)
-m2=Position(4,3)
-m1.setposition(m2)
-print(m1.position)
-print TYPE_PHYSIC
+
 
