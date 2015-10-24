@@ -25,6 +25,7 @@ class IniFile:
 
 	def ReadInt(self,sectionName,paramName):
 		value = IniFile.ReadString(self,sectionName,paramName)
+		value = float(value)
 		value = int(value)
 		return value
 		
@@ -32,11 +33,22 @@ class IniFile:
 		value = IniFile.ReadString(self,sectionName,paramName)
 		value = bool(value)
 		return value
+	
+	def ReadFloat(self,sectionName,paramName):
+		value = IniFile.ReadString(self,sectionName,paramName)
+		value = float(value)
+		return value
 		
 	def Write(self,sectionName,paramName,paramValue):
 		section='['+sectionName+']'
 		sectionFinded = False
 		copied = False
+		newFile = False
+		try: 
+			file=open(self._fileName,'r+')
+		except (OSError, IOError) as e:
+			file=open(self._fileName,'w')
+			file.close()
 		with open(self._fileName,'r+') as file:
 			with open('Copy_'+self._fileName,'w') as fileCopy:
 				for line in file:
@@ -62,10 +74,13 @@ class IniFile:
 					else:
 						fileCopy.write(line)
 				if sectionFinded == False:
-					fileCopy.write('\n'+section)
+					if newFile == False:
+						fileCopy.write('\n'+section)
+					else:
+						fileCopy.write(section)
 					fileCopy.write('\n'+paramName+'='+paramValue+'\n')
 				else:
 					if copied == False:
 						fileCopy.write('\n'+paramName+'='+paramValue)
-		os.remove(fileName)
-		os.rename('Copy_'+fileName,fileName)
+		os.remove(self._fileName)
+		os.rename('Copy_'+self._fileName,self._fileName)
