@@ -33,5 +33,9 @@ class Object(sf.Drawable):
         self.position=pos;
     def getposition(self):
         return self.position
+    def draw(self, target, states):
+        sprite=sf.Sprite(self.texture)
+        sprite.position=sf.Vector2(self.width,self.height)
+        target.draw(sprite,states)
 
 
