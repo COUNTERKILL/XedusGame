@@ -50,6 +50,7 @@ class IniFile:
 			file=open(self._fileName,'r+')
 		except (OSError, IOError) as e:
 			file=open(self._fileName,'w')
+			newFile=True
 			file.close()
 		with open(self._fileName,'r+') as file:
 			with open('Copy_'+self._fileName,'w') as fileCopy:
