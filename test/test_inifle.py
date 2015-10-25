@@ -41,6 +41,7 @@ class Test(unittest.TestCase):
 		self.assertEqual(iniFile.ReadString('config', 'LastName'), 'Yurevich')
 		#добавление параметра float
 		iniFile.Write('test','Float','123.456')
+		iniFile.Write('test','Float1','123.456')
 		self.assertEqual(iniFile.ReadFloat('test', 'Float'), 123.456)
 		#преобразование float в int
 		iniFile.Write('test','IntFloat','123.456')

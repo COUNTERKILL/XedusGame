@@ -65,23 +65,26 @@ class IniFile:
 								fileCopy.write(paramName+'='+paramValue+'\n')
 								fileCopy.write(line)
 								copied = True
-							elif ((paramName+'=') in line) & (paramName[0]==line[0]):
+							elif (paramName==line[0:line.find('=')]):
 								fileCopy.write(paramName+'='+paramValue+'\n')
 								copied = True
 								continue
 							else:
-								fileCopy.write(line)
+								if (line<>'\n') and (line<>''):
+									fileCopy.write(line)
 						else:
-							fileCopy.write(line)
+							if (line<>'\n') and (line<>''):
+								fileCopy.write(line)
 							continue		
 					else:
-						fileCopy.write(line)
+						if (line<>'\n') and (line<>''):
+							fileCopy.write(line)
 				if sectionFinded == False:
 					if newFile == False:
-						fileCopy.write('\n'+section)
+						fileCopy.write('\n'+section+'\n')
 					else:
-						fileCopy.write(section)
-					fileCopy.write('\n'+paramName+'='+paramValue+'\n')
+						fileCopy.write(section+'\n')
+					fileCopy.write(paramName+'='+paramValue)
 				else:
 					if copied == False:
 						fileCopy.write('\n'+paramName+'='+paramValue)
