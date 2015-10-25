@@ -14,15 +14,16 @@ class IniFile:
 					continue
 				if sectionFinded == True:			
 					if line[0]=='[':
-						return
+						return "Default"
 					else:
 						if paramName in line:
 							index_param_start=line.find('=')+1
-							value=line[index_param_start:len(line)]
+							value=line[index_param_start:len(line)-1]
+							print value
 							if '\n' in value:
 								value = value[0:-1]
 							return value
-		
+		return "Default"
 	_fileName=None
 
 	def ReadInt(self,sectionName,paramName):
