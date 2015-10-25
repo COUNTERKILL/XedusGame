@@ -25,6 +25,7 @@ class Object(sf.Drawable):
 		self.height=load.ReadInt("Object","height")
 		self.type_interaction=load.ReadInt("Object","type_interaction")
 		self.type_logic=load.ReadInt("Object","type_logic")
+		self.layer=load.ReadInt("Object","layer")
 		self.sprite=sf.Sprite(sf.Texture.from_file(load.ReadString("Object","texture")))
 		sf.Drawable.__init__(self)        
 	position=Position(0,0)
