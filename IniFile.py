@@ -26,18 +26,18 @@ class IniFile:
 	_fileName=None
 
 	def ReadInt(self,sectionName,paramName):
-		value = IniFile.ReadString(self,sectionName,paramName)
+		value = self.ReadString(sectionName,paramName)
 		value = float(value)
 		value = int(value)
 		return value
 		
 	def ReadBool(self,sectionName,paramName):
-		value = IniFile.ReadString(self,sectionName,paramName)
+		value = self.ReadString(sectionName,paramName)
 		value = bool(value)
 		return value
 	
 	def ReadFloat(self,sectionName,paramName):
-		value = IniFile.ReadString(self,sectionName,paramName)
+		value = self.ReadString(sectionName,paramName)
 		value = float(value)
 		return value
 		
