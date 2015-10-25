@@ -13,7 +13,7 @@ class Location(sf.Drawable):
 		self.height=load.ReadFloat("Location","height")
 		for i in range(0, self.objects_count):
 			objName = load.ReadString("Object"+str(i), "obj")
-			self.objects.append(ob.Object(iniDir + '\\' + 'oblects\\'+objName))
+			self.objects.append(ob.Object(iniDir + '\\' + 'objects\\'+objName))
 			pos = ob.Position(load.ReadString("Object"+str(i), "pos_x"), load.ReadString("Object"+str(i), "pos_y"))
 			self.objects[len(self.objects)-1].SetPosition(pos)
 		sf.Drawable.__init__(self)
@@ -36,3 +36,4 @@ class Location(sf.Drawable):
 		target.draw(self.sprite,states)
 		for obj in self.objects:
 			obj.draw(target,states)
+
