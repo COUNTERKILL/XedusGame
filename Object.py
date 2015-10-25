@@ -35,6 +35,8 @@ class Object(sf.Drawable):
 	type_logic = None
 	sprite = None    
 	layer = 0
+	def SetLayer(self,layer):
+		self.layer=layer
 	def SetPosition(self,pos):
 		self.position=pos;
 	def GetPosition(self):
