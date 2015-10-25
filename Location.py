@@ -39,6 +39,5 @@ class Location(sf.Drawable):
 		
 		target.draw(self.sprite, state)
 		for obj in self.objects:
-			state = RenderStates(blend_mode=BlendMode.BLEND_ALPHA, texture=obj.sprite.texture)
-			obj.draw(target, state)
+			target.draw(obj)
 

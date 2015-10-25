@@ -33,8 +33,7 @@ while window.is_open:
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.DOWN):
 			view.move(0, 1)
 	window.clear() # clear screen
-	state = RenderStates(blend_mode=BlendMode.BLEND_ALPHA, texture=loc.sprite.texture)
-	loc.draw(window, state)
+	window.draw(loc)
 	window.draw(text) # draw the string
 	# set the default view back
 	#window.view = window.default_view
