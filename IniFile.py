@@ -19,6 +19,8 @@ class IniFile:
 						if paramName in line:
 							index_param_start=line.find('=')+1
 							value=line[index_param_start:len(line)]
+							if '\n' in value:
+								value = value[0:-1]
 							return value
 		
 	_fileName=None
