@@ -27,29 +27,16 @@ class Animation:
     frames=[]
     currentframe=None
     texture=None
-clock=sf.Clock()
-elapsed1=clock.elapsed_time
-print(elapsed1.seconds)
-#clock.restart()
-elapsed2=clock.elapsed_time
-print(elapsed2.seconds)
-t2=sf.seconds(1)
-print(t2)
-b=Animation(sf.seconds(1))
-b.AddFrame(1);
-b.AddFrame(2);
-b.AddFrame(3);
-b.AddFrame(4);
-framess=[]
-framess.append(1)
-print(framess[0])
-while(True):
-    time.sleep(1)
-    s=b.GetFrame()
-    print(str(s))
-    print(b.clock.elapsed_time)
 
 
-
-
+if __name__=="__main__":
+    b=Animation(sf.seconds(1))
+    b.AddFrame(1);
+    b.AddFrame(2);
+    b.AddFrame(3);
+    b.AddFrame(4);
+    while(True):
+        time.sleep(1)
+        print(b.GetFrame())
+        print(b.clock.elapsed_time)
 
