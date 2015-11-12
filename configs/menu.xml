@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="windows-1251"?>
+п»ї<?xml version="1.0" encoding="utf-8"?>
 <menu>
-<item infoPortion="GameStarted" action="Return">Вернуться в игру</item>
-<item action="NewGame">Новая игра</item>
-<item action="Exit">Выход</item>
+<item infoPortion="GameStarted" action="Return">Return to game</item>
+<item action="NewGame">New game</item>
+<item action="Exit">Exit</item>
 </menu>
