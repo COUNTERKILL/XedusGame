@@ -1,10 +1,11 @@
 import sfml as sf
 import time
 class Animation:
-    def __init__(self,framestime):
-        self.framestime=framestime
+    def __init__(self,framestime,name):
+        self.framestime=sf.seconds(framestime)
         self.clock=sf.Clock()
         self.currentframe=0
+        self.name=name
     def AddFrame(self,rect):
         self.frames.append(rect)
     def GetFrame(self):
@@ -22,6 +23,7 @@ class Animation:
         self.texture=texture
     def GetSpriteTexture(self):
         return self.texture
+    name=None
     framestime=None
     clock=None
     frames=[]
@@ -30,7 +32,7 @@ class Animation:
 
 
 if __name__=="__main__":
-    b=Animation(sf.seconds(1))
+    b=Animation(1,"lol")
     b.AddFrame(1);
     b.AddFrame(2);
     b.AddFrame(3);
