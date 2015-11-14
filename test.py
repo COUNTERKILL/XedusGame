@@ -33,7 +33,7 @@ music.play()
 player = Player.Player("configs\\player.ini")
 loc = Location("locations\\test_loc\\location.ini")
 loc.AddObject(player, 0)
-player.SetPosition(Position(10, 10))
+player.SetPosition(Position(500, 500))
 # start the game loop
 while window.is_open:
 	# process events

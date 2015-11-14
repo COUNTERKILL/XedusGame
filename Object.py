@@ -45,6 +45,10 @@ class Object(sf.Drawable):
 		return self._type_interaction
 	def GetLayer(self):
 		return self._layer
+	def GetWidth(self):
+			return self._width
+	def GetHeight(self):
+		return self._height
 	_position=Position(0,0)
 	_obj_id = None
 	_type_interaction = None

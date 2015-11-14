@@ -16,6 +16,14 @@ class Player(ao.AnimatedObject):
 		if self._location.CollideTo(self):
 			self._position.x -= step.x
 			self._position.y -= step.y
+		if self._position.x < 0:
+			self._position.x = 0
+		if self._position.y < 0:
+			self._position.y = 0
+		if (self._position.x + self.GetWidth()) > self._location.GetWidth():
+			self._position.x = self._location.GetWidth() - self.GetWidth()
+		if (self._position.y + self.GetHeight()) > self._location.GetHeight():
+			self._position.y = self._location.GetHeight() - self.GetHeight()
 		if step.x > 0:
 			self.SetAnimation("walk_right")
 		if step.x < 0:
