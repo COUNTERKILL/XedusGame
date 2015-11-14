@@ -9,6 +9,7 @@ STEP_SIZE = 5
 class Player(ao.AnimatedObject):
 	def __init__(self, IniPath):
 		ao.AnimatedObject.__init__(self, IniPath)
+		self.StartAnimate()
 	def Move(self,step):
 		self._position.x += step.x
 		self._position.y += step.y
@@ -23,6 +24,14 @@ class Player(ao.AnimatedObject):
 			self.SetAnimation("walk_up")
 		if step.y > 0:
 			self.SetAnimation("walk_down")
+		if step.x==0 and step.y==0:
+			self._stopCounter += 1
+			if self._stopCounter > 1000:
+				self.StopAnimate()
+		else:
+			self._stopCounter = 0
+			self.StartAnimate()
 	def SetLocation(self,location):
 		self._location=location
 	_location = None
+	_stopCounter = 0

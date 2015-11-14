@@ -27,6 +27,10 @@ class AnimatedObject(obj.Object):
 		self._sprite.position=sf.Vector2(self._position.x,self._position.y)
 		self._sprite.texture_rectangle=self._currentAnimation.GetFrame()
 		target.draw(self._sprite,state)
+	def StopAnimate(self):
+		self._currentAnimation.Stop()
+	def StartAnimate(self):
+		self._currentAnimation.Start()
 	_rotationAngle = 0
 	_animations={}
 	_currentAnimation = None
