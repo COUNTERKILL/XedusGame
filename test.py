@@ -7,6 +7,7 @@ from Object import Position
 window = sf.RenderWindow(sf.VideoMode(640, 480), "pySFML Window")
 view = sf.View()
 view.reset(sf.Rectangle((0, 0), (640, 480)))
+view.zoom(2)
 window.view = view
 try:
 	# load a sprite to display
