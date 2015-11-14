@@ -32,7 +32,7 @@ class Animation:
 	frames = None
 	currentframe=None
 	texture=None
-	started = False
+	started = True
 
 
 if __name__=="__main__":
