@@ -39,8 +39,9 @@ class Location(sf.Drawable):
 			target.draw(obj)
 	def CollideTo(self, obj):
 		for object in self._objects:
-			if Phys.Collide(obj, object):
-				return True
+			if (object.GetTypeInteraction()==ob.TYPE_INTERACTION_PHYSICAL):
+				if Phys.Collide(obj, object):
+					return True
 		return False
 	_loc_id=None
 	_sprite=None
