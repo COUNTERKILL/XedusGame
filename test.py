@@ -1,9 +1,12 @@
 import sfml as sf
+import Player
+from Location import *
+from Object import Position
 
 # create the main window
 window = sf.RenderWindow(sf.VideoMode(640, 480), "pySFML Window")
 view = sf.View()
-view.reset(sf.Rectangle((100, 100), (640, 480)))
+view.reset(sf.Rectangle((0, 0), (640, 480)))
 window.view = view
 try:
 	# load a sprite to display
@@ -26,25 +29,30 @@ except IOError:
 
 # play the music
 music.play()
-
+player = Player.Player("configs\\player.ini")
+loc = Location("locations\\test_loc\\location.ini")
+loc.AddObject(player, 0)
+player.SetPosition(Position(10, 10))
 # start the game loop
 while window.is_open:
 	# process events
+	step = Position(0, 0)
 	for event in window.events:
 		# close window: exit
 		if type(event) is sf.CloseEvent:
 			window.close()
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.LEFT):
-			view.move(-1, 0)
+			step.x=-1*Player.STEP_SIZE
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.RIGHT):
-			view.move(1, 0)
+			step.x=Player.STEP_SIZE
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.UP):
-			view.move(0, -1)
+			step.y=-1*Player.STEP_SIZE
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.DOWN):
-			view.move(0, 1)
+			step.y=Player.STEP_SIZE
+	player.Move(step)
 	window.clear() # clear screen
-	window.draw(sprite) # draw the sprite
-	window.draw(text) # draw the string
+	window.draw(loc) # draw the sprite
+	
 	# set the default view back
 	#window.view = window.default_view
 	window.display() # update the window

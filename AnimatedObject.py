@@ -14,16 +14,16 @@ class AnimatedObject(obj.Object):
 			animation=ani.Animation(load.ReadFloat("animation"+str(j),"frame_time"),load.ReadString("animation"+str(j),"name"))
 			animation.frame_width=load.ReadInt("animation","frame_width")
 			animation.frame_height=load.ReadInt("animation","frame_height")
-			animation.SetSpriteTexture(self.sprite)
+			animation.SetSpriteTexture(self._sprite)
 			for i in range(0, frames_count):
 				animation.AddFrame(sf.Rectangle(sf.Vector2(load.ReadInt("frame"+str(i),"pos_x"), load.ReadInt("frame"+str(i),"pos_y")), sf.Vector2(animation.frame_width,animation.frame_height)))
-			self.Animations[animation.name]=animation
-		self.CurrentAnimation=self.Animations[load.ReadString("animation"+str(0),"name")]
-	Animations={}
+			self._animations[animation.name]=animation
+		self.CurrentAnimation=self._animations[load.ReadString("animation"+str(0),"name")]
 	def draw(self, target, state):
-		self.sprite.position=sf.Vector2(self.position.x,self.position.y)
-		self.sprite.texture_rectangle=self.CurrentAnimation.GetFrame()
-		target.draw(self.sprite,state)
+		self._sprite.position=sf.Vector2(self._position.x,self._position.y)
+		self._sprite.texture_rectangle=self.CurrentAnimation.GetFrame()
+		target.draw(self._sprite,state)
+	_animations={}
         
     
 if __name__=="__main__":
