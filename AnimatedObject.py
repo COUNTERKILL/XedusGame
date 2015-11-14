@@ -5,7 +5,6 @@ import Object as obj
 import Animation as ani
 
 class AnimatedObject(obj.Object):
-<<<<<<< HEAD
 	def __init__(self,ObjIniPath):
 		obj.Object.__init__(self,ObjIniPath)
 		load=ini.IniFile(ObjIniPath)
