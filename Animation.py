@@ -14,10 +14,7 @@ class Animation:
 			self.currentframe+=1
 			if self.currentframe==len(self.frames):
 				self.currentframe=0
-				return self.frames[self.currentframe]
-			return self.frames[self.currentframe]
-		else:
-			return self.frames[self.currentframe]
+		return self.frames[self.currentframe]
 	def SetSpriteTexture(self,texture):
 		self.texture=texture
 	def GetSpriteTexture(self):

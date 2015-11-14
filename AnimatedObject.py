@@ -9,6 +9,7 @@ class AnimatedObject(obj.Object):
 		obj.Object.__init__(self,ObjIniPath)
 		load=ini.IniFile(ObjIniPath)
 		animation_count=load.ReadInt("animation","count")
+		frameInd = 0
 		for j in range(0, animation_count):
 			frames_count=load.ReadInt("animation"+str(j),"frames_count")
 			animation=ani.Animation(load.ReadFloat("animation"+str(j),"frame_time"),load.ReadString("animation"+str(j),"name"))
@@ -16,9 +17,11 @@ class AnimatedObject(obj.Object):
 			animation.frame_height=load.ReadInt("animation","frame_height")
 			animation.SetSpriteTexture(self._sprite)
 			for i in range(0, frames_count):
-				animation.AddFrame(sf.Rectangle(sf.Vector2(load.ReadInt("frame"+str(i),"pos_x"), load.ReadInt("frame"+str(i),"pos_y")), sf.Vector2(animation.frame_width,animation.frame_height)))
+				animation.AddFrame(sf.Rectangle(sf.Vector2(load.ReadInt("frame"+str(frameInd),"pos_x"), load.ReadInt("frame"+str(frameInd),"pos_y")), sf.Vector2(animation.frame_width,animation.frame_height)))
+				frameInd+=1
 			self._animations[animation.name]=animation
 		self._currentAnimation=self._animations[load.ReadString("animation"+str(0),"name")]
+		#print self._currentAnimation.frames
 	def SetAnimation(self,name):
 		self._currentAnimation=self._animations[name]
 	def draw(self, target, state):
