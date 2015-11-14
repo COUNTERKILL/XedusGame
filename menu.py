@@ -69,13 +69,18 @@ class Menu:
 			return
 		self.ProcessKey()
 		for item in self._items:
-			text = item.GetTextObject()
-			self._window.draw(text)
+			if self.CheckInfoPortion(item.GetInfoPortion()):
+				text = item.GetTextObject()
+				self._window.draw(text)
 	def ProcessKey(self):
 		for event in self._window.events:
 			# close window: exit
 			if type(event) is sf.CloseEvent:
 				self._window.close()
+			if sf.Mouse.is_button_pressed(sf.Mouse.LEFT):
+				for item in self._items:
+					if self.CheckInfoPortion(item.GetInfoPortion()) and item.UnderMouse():
+						self.DoAction(item.GetAction())
 		sf.Mouse.get_position()
 	def Start(self):
 		self.view = self._window.view
@@ -86,6 +91,13 @@ class Menu:
 		self._window.view = self._view
 	def Started(self):
 		return self._started
+	def CheckInfoPortion(self, infoPortion):
+		if infoPortion==None:
+			return True
+		return False
+	def DoAction(self, action):
+		if action=="Exit":
+			exit(0)
 	_items = []
 	_started = None
 	_window = None
