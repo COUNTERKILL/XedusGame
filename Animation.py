@@ -6,6 +6,7 @@ class Animation:
 		self.clock=sf.Clock()
 		self.currentframe=0
 		self.name=name
+		self.frames = []
 	def AddFrame(self,rect):
 		self.frames.append(rect)
 	def GetFrame(self):
@@ -22,7 +23,7 @@ class Animation:
 	name=None
 	framestime=None
 	clock=None
-	frames=[]
+	frames = None
 	currentframe=None
 	texture=None
 

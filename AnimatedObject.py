@@ -21,7 +21,6 @@ class AnimatedObject(obj.Object):
 				frameInd+=1
 			self._animations[animation.name]=animation
 		self._currentAnimation=self._animations[load.ReadString("animation"+str(0),"name")]
-		#print self._currentAnimation.frames
 	def SetAnimation(self,name):
 		self._currentAnimation=self._animations[name]
 	def draw(self, target, state):
