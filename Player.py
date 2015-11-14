@@ -6,8 +6,6 @@ import Object as obj
 class Player(ao.AnimatedObject):
     def __init__(self,IniPath):
         ao.AnimatedObject.__init__(self,IniPath)
-        load=ini.IniFile(IniPath)
-        self._location=loc.Location(load.ReadString("player","location"))
     def Move(self,step):
         valid=True
         for obj in self._location.objects:
