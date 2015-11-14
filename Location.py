@@ -8,6 +8,7 @@ import Player
                                                           
 class Location(sf.Drawable):
 	def __init__(self, locIniPath):
+		self._objects = []
 		load=ini.IniFile(locIniPath)
 		iniDir = os.path.dirname(locIniPath)
 		self._objects_count=load.ReadInt("Location","objects_count")
@@ -46,7 +47,7 @@ class Location(sf.Drawable):
 		return False
 	_loc_id=None
 	_sprite=None
-	_objects=[]
+	_objects = None
 	_objects_count=0
 	_width = 0
 	_height = 0

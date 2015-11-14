@@ -51,6 +51,7 @@ while window.is_open:
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.DOWN):
 			step.y=Player.STEP_SIZE
 	player.Move(step)
+	view.center = sf.Vector2(player._position.x, player._position.y)
 	window.clear() # clear screen
 	window.draw(loc) # draw the sprite
 	

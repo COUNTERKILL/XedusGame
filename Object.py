@@ -25,8 +25,8 @@ class Object(sf.Drawable):
 	def __init__(self, ObjIniPath):
 		load=ini.IniFile(ObjIniPath)
 		iniDir = os.path.dirname(ObjIniPath)
-		self.width=load.ReadInt("Object","width")
-		self.height=load.ReadInt("Object","height")
+		self._width=load.ReadInt("Object","width")
+		self._height=load.ReadInt("Object","height")
 		self._type_interaction=load.ReadInt("Object","type_interaction")
 		self._type_logic=load.ReadInt("Object","type_logic")
 		self._sprite=sf.Sprite(sf.Texture.from_file(iniDir+'\\images\\'+load.ReadString("Object","texture")))
@@ -38,7 +38,7 @@ class Object(sf.Drawable):
 	def GetPosition(self):
 		return self._position
 	def draw(self, target, state):
-		self._sprite.position=sf.Vector2(self._position.x,self._position.y)
+		self._sprite.position=sf.Vector2(self._position.x, self._position.y)
 		self._sprite.texture_rectangle=sf.Rectangle((0,0),(self._width,self._height))
 		target.draw(self._sprite, state)
 	def GetTypeInteraction(self):
