@@ -3,6 +3,20 @@ import Player
 from Location import *
 from Object import Position
 import AnimatedObject 
+
+def RechangeView(window):
+	step = sf.Vector2(0, 0)
+	mousePos = sf.Mouse.get_position(window) - window.view.viewport.position
+	if mousePos.x < 100:
+		step.x = -0.3
+	if mousePos.y < 100:
+		step.y = -0.3
+	if mousePos.x > (window.size.x - 100):
+		step.x = 0.3
+	if mousePos.y > (window.size.y - 100):
+		step.y = 0.3
+	window.view.center += step
+
 # create the main window
 window = sf.RenderWindow(sf.VideoMode(640, 480), "pySFML Window")
 view = sf.View()
@@ -15,9 +29,9 @@ loc = Location("locations\\test_loc\\redactor_loc.ini")
 obj=None
 a=False
 while window.is_open:
-    # process events
-    for event in window.events:
-        # close window: exit
+	# process events
+	for event in window.events:
+		# close window: exit
 		if type(event) is sf.CloseEvent:
 			window.close()
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.A):
@@ -39,12 +53,12 @@ while window.is_open:
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.DOWN):
 			step.y=Player.STEP_SIZE
 		if obj:
-			position=sf.Mouse.get_position()
-			obj.SetPosition(Position(position.x,position.y))
-    view.center = sf.Mouse.get_position()
-    window.clear() # clear screen
-    window.draw(loc) # draw the sprite
-    if(a): window.draw(obj)
-    # set the default view back
-    #window.view = window.default_view
-    window.display() # update the window
+			position = Position(window.view.center.x, window.view.center.y)
+			obj.SetPosition(position)
+	RechangeView(window)
+	window.clear() # clear screen
+	window.draw(loc) # draw the sprite
+	if(a): window.draw(obj)
+	# set the default view back
+	#window.view = window.default_view
+	window.display() # update the window
