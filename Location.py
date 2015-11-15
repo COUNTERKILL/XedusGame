@@ -15,6 +15,7 @@ class Location(sf.Drawable):
 		self._objects_count=load.ReadInt("Location","objects_count")
 		texture = sf.Texture.from_file(iniDir+'\\'+load.ReadString("Location","texture"))
 		texture.repeated = True
+		self._playerStartPosition = ob.Position(load.ReadInt("Location","player_start_position_x"), load.ReadInt("Location","player_start_position_y"))
 		self._sprite=sf.Sprite(texture)
 		self._width=load.ReadInt("Location","width")
 		self._height=load.ReadInt("Location","height")
@@ -55,9 +56,12 @@ class Location(sf.Drawable):
 		return self._width
 	def GetHeight(self):
 		return self._height
+	def GetPlayerStartPosition(self):
+		return self._playerStartPosition
 	_loc_id=None
 	_sprite=None
 	_objects = None
 	_objects_count=0
 	_width = 0
 	_height = 0
+	_playerStartPosition = None

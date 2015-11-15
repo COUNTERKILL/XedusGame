@@ -46,7 +46,10 @@ class MenuItem:
 	_window = None
 
 class Menu:
-	def __init__(self, window):
+	def __init__(self, window, game = None):
+		if game:
+			self._game = game
+			game.SetMenu(self)
 		self._window = window
 		tree = ET.parse('configs\\menu.xml')
 		root = tree.getroot()
@@ -83,7 +86,7 @@ class Menu:
 						self.DoAction(item.GetAction())
 		sf.Mouse.get_position()
 	def Start(self):
-		self.view = self._window.view
+		self._view = self._window.view
 		self._window.view.reset(sf.Rectangle((0, 0), (640, 480)))
 		self._started = True
 	def Stop(self):
@@ -94,10 +97,19 @@ class Menu:
 	def CheckInfoPortion(self, infoPortion):
 		if infoPortion==None:
 			return True
+		if infoPortion=="GameStarted":
+			return self._game._initialized
 		return False
 	def DoAction(self, action):
 		if action=="Exit":
 			exit(0)
+		if action=="Return":
+			self.Stop()
+			self._game.Start()
+	def SetGame(self, game):
+		self._game = game
 	_items = []
 	_started = None
 	_window = None
+	_game = None
+	_view = None

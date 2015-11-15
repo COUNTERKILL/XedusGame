@@ -1,16 +1,21 @@
 import AnimatedObject as ao
+import sfml as sf
 import Location as loc
 import Physics as Phys
 import IniFile as ini
 import Object as obj
 
-STEP_SIZE = 5
+STEP_SIZE = 1
 
 class Player(ao.AnimatedObject):
 	def __init__(self, IniPath):
 		ao.AnimatedObject.__init__(self, IniPath)
 		self.StartAnimate()
+		self._clock=sf.Clock()
 	def Move(self,step):
+		if self._clock.elapsed_time < sf.milliseconds(5):
+			return
+		self._clock.restart()
 		self._position.x += step.x
 		self._position.y += step.y
 		if self._location.CollideTo(self):
@@ -43,3 +48,4 @@ class Player(ao.AnimatedObject):
 		self._location=location
 	_location = None
 	_stopCounter = 0
+	_clock=None
