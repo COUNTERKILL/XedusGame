@@ -4,9 +4,9 @@ from Game import *
 from menu import *
 
 # create the main window
-window = sf.RenderWindow(sf.VideoMode(640, 480), "pySFML Window")
+window = sf.RenderWindow(sf.VideoMode(1024, 768), "pySFML Window")
 view = sf.View()
-view.reset(sf.Rectangle((0, 0), (640, 480)))
+view.reset(sf.Rectangle((0, 0), (1024, 768)))
 view.zoom(2)
 window.view = view
 try:

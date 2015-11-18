@@ -30,6 +30,7 @@ class Object(sf.Drawable):
 		self._type_interaction=load.ReadInt("Object","type_interaction")
 		self._type_logic=load.ReadInt("Object","type_logic")
 		self._sprite=sf.Sprite(sf.Texture.from_file(iniDir+'\\images\\'+load.ReadString("Object","texture")))
+		self._logicFileName = load.ReadString("Object", "logic")
 		sf.Drawable.__init__(self)        
 	def SetLayer(self,layer):
 		self._layer=layer
@@ -57,4 +58,5 @@ class Object(sf.Drawable):
 	_layer = 0
 	_width = 0
 	_height = 0
+	_logicFileName = None
 

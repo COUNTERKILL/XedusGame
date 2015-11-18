@@ -87,7 +87,7 @@ class Menu:
 		sf.Mouse.get_position()
 	def Start(self):
 		self._view = self._window.view
-		self._window.view.reset(sf.Rectangle((0, 0), (640, 480)))
+		self._window.view.reset(sf.Rectangle((0, 0), (1024, 768)))
 		self._started = True
 	def Stop(self):
 		self._started = False

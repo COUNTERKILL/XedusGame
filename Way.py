@@ -12,6 +12,8 @@ class WayPoint:
         return self._position
     def GetAnimation(self):
         return self._animation
+	_animation = None
+	_position = None
     
 class Way:
     def __init__(self,LogicFileName):
