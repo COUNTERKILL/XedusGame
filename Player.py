@@ -4,14 +4,12 @@ import Location as loc
 import Physics as Phys
 import IniFile as ini
 import Object as obj
-from live import Live
 
 STEP_SIZE = 1
 
-class Player(ao.AnimatedObject, Live):
+class Player(ao.AnimatedObject):
 	def __init__(self, IniPath):
 		ao.AnimatedObject.__init__(self, IniPath)
-		Live.__init__(self)
 		self.StartAnimate()
 		self._clock=sf.Clock()
 	def Move(self,step):

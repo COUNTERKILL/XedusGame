@@ -16,7 +16,7 @@ class IniFile:
 					if line[0]=='[':
 						return "Default"
 					else:
-						if paramName in line:
+						if paramName == line[0:line.find('=')]:
 							index_param_start=line.find('=')+1
 							value=line[index_param_start:len(line)]
 							if '\n' in value:

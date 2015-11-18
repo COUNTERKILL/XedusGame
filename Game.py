@@ -2,6 +2,7 @@ import sfml as sf
 from Player import *
 from Location import *
 from Object import Position
+from simulator import Simulator
 
 class Game:
 	def __init__(self, window, menu = None):
@@ -14,10 +15,12 @@ class Game:
 		self._location = Location("locations\\test_loc\\location.ini")
 		self._location.AddObject(self._player, 0)
 		self._player.SetPosition(self._location.GetPlayerStartPosition())
+		self._simulator = Simulator(self._location)
 	def DrawFrame(self):
 		if not self._started:
 			return
 		self.ProcessKey()
+		self._simulator.ProcessFrame()
 		self._window.draw(self._location)
 	def ProcessKey(self):
 		step = Position(0, 0)

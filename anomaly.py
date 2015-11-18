@@ -1,0 +1,25 @@
+from logicObject import LogicObject
+import IniFile as ini
+import sfml as sf
+
+class Anomaly(LogicObject):
+	def __init__(self, simulation, object):
+		LogicObject.__init__(self, simulation, object)
+		logicFileName = object.GetLogicFileName()
+		objectLogicPath = self._simulator._location.GetLocationIniDir() + "\\logics\\" + logicFileName
+		configFile=ini.IniFile(objectLogicPath)
+		self._damage = configFile.ReadInt("anomaly", "damage")
+		self._temeReloading = configFile.ReadInt("anomaly", "time_reloading")
+		self._clock = sf.Clock()
+	def ActivateTo(self, live):
+		if self._clock.elapsed_time.milliseconds < self._temeReloading:
+			return
+		live.SetHealth(live.GetHealth() - self._damage)
+		self.Activate()
+	def Activate(self):
+		self._clock.restart()
+		self._object.SetAnimation("ACTIVE")
+		self._object.SetNextAnimation("PASSIVE")
+	_damage = None
+	_temeReloading = None
+	_clock = None

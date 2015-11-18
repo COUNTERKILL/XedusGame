@@ -67,6 +67,8 @@ class Object(sf.Drawable):
 			return self._width
 	def GetHeight(self):
 		return self._height
+	def GetLogicFileName(self):
+		return self._logicFileName
 	_position=Position(0,0)
 	_obj_id = None
 	_type_interaction = None

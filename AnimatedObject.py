@@ -24,6 +24,10 @@ class AnimatedObject(obj.Object):
 	def SetAnimation(self,name):
 		self._currentAnimation=self._animations[name]
 	def draw(self, target, state):
+		if self._nextAnimation:
+			if self._currentAnimation.GetAnimationItersCount() >= 1:
+				self._currentAnimation=self._animations[self._nextAnimation]
+				self._nextAnimation = None
 		self._sprite.position=sf.Vector2(self._position.x,self._position.y)
 		self._sprite.texture_rectangle=self._currentAnimation.GetFrame()
 		target.draw(self._sprite,state)
@@ -31,9 +35,12 @@ class AnimatedObject(obj.Object):
 		self._currentAnimation.Stop()
 	def StartAnimate(self):
 		self._currentAnimation.Start()
+	def SetNextAnimation(self, animationName):
+		self._nextAnimation = animationName
 	_rotationAngle = 0
 	_animations={}
 	_currentAnimation = None
+	_nextAnimation = None
         
     
 if __name__=="__main__":
