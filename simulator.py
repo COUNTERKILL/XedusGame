@@ -40,8 +40,8 @@ class Simulator:
 					if issubclass(logicObjectIter.__class__, Anomaly):
 						if logicObject.InAnomaly(logicObjectIter):
 							logicObjectIter.ActivateTo(logicObject)
-							if self._player.GetHealth()==0:
-								self._isGameOver = True
+		if self._player.GetHealth()==0:
+			self._isGameOver = True
 	def IsGameOver(self):
 		return self._isGameOver
 	_logicObjects = None

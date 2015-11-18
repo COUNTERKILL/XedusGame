@@ -21,16 +21,11 @@ try:
 	font = sf.Font.from_file("airborne.ttf")
 	text = sf.Text("Hello SFML", font, 50)
 
-	# load music to play
-	music = sf.Music.from_file("garbage_day.ogg")
-
 except IOError:
 	print("Error")
 	exit(1)
 menu = Menu(window)
 menu.Start()
-# play the music
-music.play()
 # start the game loop
 game = None
 while window.is_open:

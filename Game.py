@@ -22,6 +22,7 @@ class Game:
 		self._gameOverText.color = sf.Color.WHITE
 		self._gameOverText.position = sf.Vector2(self._window.view.center.x - self._window.width*0.7, self._window.view.center.y - self._window.width*0.5)
 		self._gameOverText.character_size = 100
+		self._music = sf.Music.from_file("garbage_day.ogg")
 	def DrawFrame(self):
 		if not self._started:
 			return
@@ -55,8 +56,10 @@ class Game:
 		self._window.view.center = sf.Vector2(self._player._position.x, self._player._position.y)
 	def Start(self):
 		self._window.view.center = sf.Vector2(self._player._position.x, self._player._position.y)
+		self._music.play()
 		self._started = True
 	def Stop(self):
+		self._music.pause()
 		self._started = False
 	def SetMenu(self, menu):
 		self._menu = menu
@@ -66,3 +69,4 @@ class Game:
 	_menu = None
 	_initialized = False
 	_gameOverText = None
+	_music = None
