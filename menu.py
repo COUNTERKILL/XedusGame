@@ -1,6 +1,7 @@
 ﻿import xml.etree.ElementTree as ET
 import sys
 import sfml as sf
+from game import Game
 
 class MenuItem:
 	def __init__(self, window, infoPortion, action, text, position):
@@ -70,6 +71,8 @@ class Menu:
 	def DrawFrame(self):
 		if not self._started:
 			return
+		if self._game and self._game._simulator.IsGameOver():
+			del self._game
 		self.ProcessKey()
 		for item in self._items:
 			if self.CheckInfoPortion(item.GetInfoPortion()):
@@ -80,11 +83,10 @@ class Menu:
 			# close window: exit
 			if type(event) is sf.CloseEvent:
 				self._window.close()
-			if sf.Mouse.is_button_pressed(sf.Mouse.LEFT):
-				for item in self._items:
-					if self.CheckInfoPortion(item.GetInfoPortion()) and item.UnderMouse():
-						self.DoAction(item.GetAction())
-		sf.Mouse.get_position()
+		if sf.Mouse.is_button_pressed(sf.Mouse.LEFT):
+			for item in self._items:
+				if self.CheckInfoPortion(item.GetInfoPortion()) and item.UnderMouse():
+					self.DoAction(item.GetAction())
 	def Start(self):
 		self._view = self._window.view
 		self._window.view.reset(sf.Rectangle((0, 0), (1024, 768)))
@@ -98,13 +100,19 @@ class Menu:
 		if infoPortion==None:
 			return True
 		if infoPortion=="GameStarted":
-			return self._game._initialized
+			if self._game:
+				return self._game._initialized
+			return False
 		return False
 	def DoAction(self, action):
 		if action=="Exit":
 			exit(0)
 		if action=="Return":
 			self.Stop()
+			self._game.Start()
+		if action=="NewGame":
+			self.Stop()
+			self._game = Game(self._window, self)
 			self._game.Start()
 	def SetGame(self, game):
 		self._game = game

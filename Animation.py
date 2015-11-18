@@ -30,6 +30,8 @@ class Animation:
 		self.started = True
 	def GetAnimationItersCount(self):
 		return self._itersCount
+	def SetAnimationItersCount(self, value):
+		self._itersCount = value
 	name=None
 	framestime=None
 	clock=None

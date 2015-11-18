@@ -16,12 +16,21 @@ class Game:
 		self._location.AddObject(self._player, 0)
 		self._player.SetPosition(self._location.GetPlayerStartPosition())
 		self._simulator = Simulator(self._location)
+		font = sf.Font.from_file("arial.ttf")
+		self._gameOverText = sf.Text("Game over!")
+		self._gameOverText.font = font
+		self._gameOverText.color = sf.Color.WHITE
+		self._gameOverText.position = sf.Vector2(self._window.view.center.x - self._window.width*0.7, self._window.view.center.y - self._window.width*0.5)
+		self._gameOverText.character_size = 100
 	def DrawFrame(self):
 		if not self._started:
 			return
 		self.ProcessKey()
-		self._simulator.ProcessFrame()
+		if not self._simulator.IsGameOver():
+			self._simulator.ProcessFrame()
 		self._window.draw(self._location)
+		if self._simulator.IsGameOver():
+			self._window.draw(self._gameOverText)
 	def ProcessKey(self):
 		step = Position(0, 0)
 		for event in self._window.events:
@@ -31,6 +40,8 @@ class Game:
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.ESCAPE):
 			self.Stop()
 			self._menu.Start()
+			return
+		if self._simulator.IsGameOver():
 			return
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.LEFT):
 			step.x=-1*STEP_SIZE
@@ -54,3 +65,4 @@ class Game:
 	_started = False
 	_menu = None
 	_initialized = False
+	_gameOverText = None

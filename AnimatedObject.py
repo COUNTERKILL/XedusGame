@@ -26,6 +26,7 @@ class AnimatedObject(obj.Object):
 	def draw(self, target, state):
 		if self._nextAnimation:
 			if self._currentAnimation.GetAnimationItersCount() >= 1:
+				self._currentAnimation.SetAnimationItersCount(0)
 				self._currentAnimation=self._animations[self._nextAnimation]
 				self._nextAnimation = None
 		self._sprite.position=sf.Vector2(self._position.x,self._position.y)

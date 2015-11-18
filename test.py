@@ -1,6 +1,6 @@
 import sfml as sf
 
-from Game import *
+from game import *
 from menu import *
 
 # create the main window
@@ -28,15 +28,17 @@ except IOError:
 	print("Error")
 	exit(1)
 menu = Menu(window)
-game = Game(window, menu)
 menu.Start()
 # play the music
 music.play()
 # start the game loop
+game = None
 while window.is_open:
 	window.clear() # clear screen
+	game = menu._game
 	menu.DrawFrame()
-	game.DrawFrame()
+	if game!=None:
+		game.DrawFrame()
 	
 	# set the default view back
 	#window.view = window.default_view

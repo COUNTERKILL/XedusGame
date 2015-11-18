@@ -30,6 +30,7 @@ class Simulator:
 				print("Object time not defined: " + unit_type)
 				continue
 			self._logicObjects.append(logicObject)
+		self._isGameOver = False
 	def ProcessFrame(self):
 		for logicObject in self._logicObjects:
 			if issubclass(logicObject.__class__, Walker):
@@ -39,6 +40,11 @@ class Simulator:
 					if issubclass(logicObjectIter.__class__, Anomaly):
 						if logicObject.InAnomaly(logicObjectIter):
 							logicObjectIter.ActivateTo(logicObject)
+							if self._player.GetHealth()==0:
+								self._isGameOver = True
+	def IsGameOver(self):
+		return self._isGameOver
 	_logicObjects = None
 	_player = None
 	_location = None
+	_isGameOver = None
