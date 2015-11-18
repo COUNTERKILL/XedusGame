@@ -12,11 +12,12 @@ def GetRelation(group1,group2):
     else:
         return NEUTRAL
 def SetRelation(group1,group2,value):
-    if value<=5000 and value>=5000:
-        IniReader.Write(group1,group2,value)
-        return True
+    if value<=-5000:
+        value=-5000
+    elif value>=5000:
+        value=5000        
     else:
-        return False
-    
+        IniReader.Write(group1,group2,value)
+
 
     
