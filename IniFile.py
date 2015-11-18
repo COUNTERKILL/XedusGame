@@ -53,7 +53,7 @@ class IniFile:
 			newFile=True
 			file.close()
 		with open(self._fileName,'r+') as file:
-			with open('Copy_'+self._fileName,'w') as fileCopy:
+			with open(self._fileName + '_Copy','w') as fileCopy:
 				for line in file:
 					if copied == False:
 						if section in line:
@@ -62,11 +62,11 @@ class IniFile:
 							continue
 						if sectionFinded == True:			
 							if line[0]=='[':
-								fileCopy.write(paramName+'='+paramValue+'\n')
+								fileCopy.write(paramName+'='+str(paramValue)+'\n')
 								fileCopy.write(line)
 								copied = True
 							elif (paramName==line[0:line.find('=')]):
-								fileCopy.write(paramName+'='+paramValue+'\n')
+								fileCopy.write(paramName+'='+str(paramValue)+'\n')
 								copied = True
 								continue
 							else:
@@ -84,9 +84,9 @@ class IniFile:
 						fileCopy.write('\n'+section+'\n')
 					else:
 						fileCopy.write(section+'\n')
-					fileCopy.write(paramName+'='+paramValue)
+					fileCopy.write(paramName+'='+str(paramValue))
 				else:
 					if copied == False:
-						fileCopy.write('\n'+paramName+'='+paramValue)
+						fileCopy.write('\n'+paramName+'='+str(paramValue))
 		os.remove(self._fileName)
-		os.rename('Copy_'+self._fileName,self._fileName)
+		os.rename(self._fileName + '_Copy',self._fileName)
