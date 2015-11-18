@@ -41,4 +41,4 @@ class Way:
     _ways=None
     _currentWayPointIndex=None
 
-Ways=Way("locations\\logics\\test_npc.ini")
+
