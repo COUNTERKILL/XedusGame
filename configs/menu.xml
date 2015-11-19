@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<menu>
+<menu background="menu_background.png">
 <item infoPortion="GameStarted" action="Return">Return to game</item>
 <item action="NewGame">New game</item>
 <item action="Exit">Exit</item>

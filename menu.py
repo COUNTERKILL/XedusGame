@@ -10,10 +10,10 @@ class MenuItem:
 		self._action = action
 		self._position = position
 		self._text = text
-		font = sf.Font.from_file("arial.ttf")
+		font = sf.Font.from_file("PhageRoughKG.ttf")
 		self._textObj = sf.Text(self.GetText())
 		self._textObj.font = font
-		self._textObj.color = sf.Color.GREEN
+		self._textObj.color = sf.Color.WHITE
 		self._textObj.position = position
 		self._textObj.character_size = 24
 		self._width = self._textObj.local_bounds.width
@@ -56,7 +56,9 @@ class Menu:
 		root = tree.getroot()
 		if root.tag != "menu":
 			sys.exit("Menu file is incorrect")
-		startPosition_x = self._window.width/2.5
+		backgroundImageName = root.attrib.get("background")
+		self._backgroundImage = sf.Sprite(sf.Texture.from_file("images\\" + backgroundImageName))
+		startPosition_x = self._window.width/2.6
 		startPosition_y = self._window.height/3
 		dY = 0
 		for child in root:
@@ -74,6 +76,7 @@ class Menu:
 		if self._game and self._game._simulator.IsGameOver():
 			del self._game
 		self.ProcessKey()
+		self._window.draw(self._backgroundImage)
 		for item in self._items:
 			if self.CheckInfoPortion(item.GetInfoPortion()):
 				text = item.GetTextObject()
@@ -121,3 +124,4 @@ class Menu:
 	_window = None
 	_game = None
 	_view = None
+	_backgroundImage = None
