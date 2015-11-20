@@ -73,7 +73,7 @@ class Menu:
 			dY = dY + 30
 			item = MenuItem(self._window, infoPortion, action, text, position)
 			self._items.append(item)
-		self._music = musicCollection.GetMusicByName("MENU")
+		self._music = musicCollection.GetMusic("BACK", "MENU")
 		self._music.loop = True
 		self._started = False
 	def DrawFrame(self):

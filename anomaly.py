@@ -21,7 +21,7 @@ class Anomaly(LogicObject):
 	def Activate(self):
 		self._clock.restart()
 		self._object.SetAnimation("ACTIVE")
-		self._music = musicCollection.GetMusicByName("ELECTRA_ACTIVE")
+		self._music = musicCollection.GetMusic("ANOMALIES", "ELECTRA_ACTIVE")
 		self._music.play()
 		self._object.SetNextAnimation("PASSIVE")
 	_damage = None

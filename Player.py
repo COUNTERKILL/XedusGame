@@ -13,6 +13,7 @@ class Player(ao.AnimatedObject):
 		ao.AnimatedObject.__init__(self, IniPath)
 		self.StartAnimate()
 		self._clock=sf.Clock()
+		self._stepBetweenTime = sf.Clock()
 	def Move(self,step):
 		if self._clock.elapsed_time < sf.milliseconds(5):
 			return
@@ -48,11 +49,13 @@ class Player(ao.AnimatedObject):
 			self._stopCounter = 0
 			self.StartAnimate()
 			music = musicCollection.GetMusic("ACTOR", "STEP")
-			if music.status == sf.audio.SoundSource.STOPPED:
-				music.loop = True
-				music.start()
+			if music.status == sf.audio.SoundSource.STOPPED and self._stepBetweenTime.elapsed_time.seconds > 0.4:
+				self._stepBetweenTime.restart()
+				music.volume = 50
+				music.play()
 	def SetLocation(self,location):
 		self._location=location
 	_location = None
 	_stopCounter = 0
 	_clock=None
+	_stepBetweenTime = None

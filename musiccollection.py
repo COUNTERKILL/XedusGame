@@ -24,9 +24,8 @@ class MusicCollection:
     _collection={}
 
         
-if __name__=="__main__":        
-    musicCollection = MusicCollection("configs\\music.ini")
-    sf.Music.play(musicCollection.GetMusic("ANOMALIES","ELECTRA_ACTIVE"))
+       
+musicCollection = MusicCollection("configs\\music.ini")
         
         
     
