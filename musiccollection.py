@@ -11,7 +11,7 @@ class MusicCollection:
             Music={}
             for j in range(0,music_count):
                 Music[IniReader.ReadString("music"+str(music_index),"name")] \
-                =sf.Music.from_file \
+                =sf.Music.from_file\
                 (IniReader.ReadString("music"+str(music_index),"path")) 
                 music_index+=1
             self.Collection[IniReader.ReadString("group"+str(i),"name")]=Music
@@ -24,6 +24,11 @@ class MusicCollection:
     def AddMusic(self,group,name,path):
         self.Collection[group][name]=sf.Music.from_file(path)
     Collection={}
+
+coll = MusicCollection("configs\\music_test.ini")
+for obj in coll.Collection["ANOMALIES"]:
+    print obj
+sf.Music.play(coll.GetRandomInGroup("ANOMALIES"))
 
         
         
