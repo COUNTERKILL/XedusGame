@@ -1,6 +1,7 @@
 from logicObject import LogicObject
 import IniFile as ini
 import sfml as sf
+import random
 
 class Anomaly(LogicObject):
 	def __init__(self, simulation, object):
@@ -14,7 +15,7 @@ class Anomaly(LogicObject):
 	def ActivateTo(self, live):
 		if self._clock.elapsed_time.milliseconds < self._temeReloading:
 			return
-		live.SetHealth(live.GetHealth() - self._damage)
+		live.SetHealth(live.GetHealth() - random.randint(self._damage*0.2, self._damage*1.5))
 		self.Activate()
 	def Activate(self):
 		self._clock.restart()
