@@ -4,7 +4,7 @@ from Location import *
 from Object import Position
 from simulator import Simulator
 from hud import Hud
-
+from musiccollection import musicCollection
 
 class Game:
 	def __init__(self, window, menu = None):
@@ -23,8 +23,12 @@ class Game:
 		self._gameOverText.font = font
 		self._gameOverText.color = sf.Color.WHITE
 		self._gameOverText.character_size = 150
-		self._music = sf.Music.from_file("garbage_day.ogg")
+		self._music = musicCollection.GetMusicByName("MENU")
+		print musicCollection._collection
+		self._music.play()
+		
 		self._hud = Hud(window, self._simulator.GetPlayer())
+		
 	def DrawFrame(self):
 		if not self._started:
 			return
@@ -73,4 +77,6 @@ class Game:
 	_menu = None
 	_initialized = False
 	_gameOverText = None
+	_music = None
+	_musicCollection = None
 	_music = None

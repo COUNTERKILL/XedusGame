@@ -14,20 +14,20 @@ class MusicCollection:
                 =sf.Music.from_file \
                 (IniReader.ReadString("music"+str(music_index),"path")) 
                 music_index+=1
-            self.Collection[IniReader.ReadString("group"+str(i),"name")]=Music
+            self._collection[IniReader.ReadString("group"+str(i),"name")]=Music
     def GetMusicByName(self,name):
-        for key in self.Collection.keys():
-            if name in self.Collection[key].keys():
-                return self.Collection[key][name]
+        for key in self._collection.keys():
+            if name in self._collection[key].keys():
+                return self._collection[key][name]
     def GetRandomInGroup(self,group):
-        return random.choice(self.Collection[group].values())
+        return random.choice(self._collection[group].values())
     def AddMusic(self,group,name,path):
-        self.Collection[group][name]=sf.Music.from_file(path)
-    Collection={}
+        self._collection[group][name]=sf.Music.from_file(path)
+    _collection={}
 
         
         
-        
+musicCollection = MusicCollection("configs\\music.ini")
         
         
         
