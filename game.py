@@ -23,10 +23,7 @@ class Game:
 		self._gameOverText.font = font
 		self._gameOverText.color = sf.Color.WHITE
 		self._gameOverText.character_size = 150
-		self._music = musicCollection.GetMusicByName("MENU")
-		print musicCollection._collection
-		self._music.play()
-		
+		self._music = musicCollection.GetRandomInGroup("AMBIENT")
 		self._hud = Hud(window, self._simulator.GetPlayer())
 		
 	def DrawFrame(self):
@@ -79,4 +76,3 @@ class Game:
 	_gameOverText = None
 	_music = None
 	_musicCollection = None
-	_music = None

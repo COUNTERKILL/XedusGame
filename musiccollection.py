@@ -27,11 +27,7 @@ class MusicCollection:
 
         
         
-<<<<<<< HEAD
 musicCollection = MusicCollection("configs\\music.ini")
         
-        
-=======
->>>>>>> 93f4c17275b51d56e497b3d7bfad42b98c504193
         
     

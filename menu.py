@@ -2,6 +2,7 @@
 import sys
 import sfml as sf
 from game import Game
+from musiccollection import musicCollection
 
 ZOOM = 2
 
@@ -72,6 +73,7 @@ class Menu:
 			dY = dY + 30
 			item = MenuItem(self._window, infoPortion, action, text, position)
 			self._items.append(item)
+		self._music = musicCollection.GetMusicByName("MENU")
 		self._started = False
 	def DrawFrame(self):
 		if not self._started:
@@ -109,10 +111,12 @@ class Menu:
 	def Start(self):
 		self._view = self._window.view
 		self._window.view.reset(sf.Rectangle((0, 0), (self._window.width, self._window.height)))
+		self._music.play()
 		self._started = True
 	def Stop(self):
 		self._started = False
 		self._window.view = self._view
+		self._music.stop()
 	def Started(self):
 		return self._started
 	def CheckInfoPortion(self, infoPortion):
@@ -141,4 +145,5 @@ class Menu:
 	_game = None
 	_view = None
 	_backgroundImage = None
+	_music = None
 	#_oldWindowSize = None

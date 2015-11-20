@@ -2,6 +2,7 @@ from logicObject import LogicObject
 import IniFile as ini
 import sfml as sf
 import random
+from musiccollection import musicCollection
 
 class Anomaly(LogicObject):
 	def __init__(self, simulation, object):
@@ -20,6 +21,8 @@ class Anomaly(LogicObject):
 	def Activate(self):
 		self._clock.restart()
 		self._object.SetAnimation("ACTIVE")
+		self._music = musicCollection.GetMusicByName("ELECTRA_ACTIVE")
+		self._music.play()
 		self._object.SetNextAnimation("PASSIVE")
 	_damage = None
 	_temeReloading = None
