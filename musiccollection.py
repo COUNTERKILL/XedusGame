@@ -25,14 +25,6 @@ class MusicCollection:
         self.Collection[group][name]=sf.Music.from_file(path)
     Collection={}
 
-coll = MusicCollection("configs\\music_test.ini")
-for obj in coll.Collection["ANOMALIES"]:
-    print obj
-sf.Music.play(coll.GetRandomInGroup("ANOMALIES"))
-
-        
-        
-        
         
         
         
