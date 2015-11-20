@@ -5,6 +5,7 @@ from Object import Position
 from simulator import Simulator
 from hud import Hud
 
+
 class Game:
 	def __init__(self, window, menu = None):
 		if menu:

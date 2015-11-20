@@ -3,6 +3,8 @@ import sys
 import sfml as sf
 from game import Game
 
+ZOOM = 2
+
 class MenuItem:
 	def __init__(self, window, infoPortion, action, text, position):
 		self._window = window
@@ -52,15 +54,15 @@ class Menu:
 			self._game = game
 			game.SetMenu(self)
 		self._window = window
-		self._oldWindowSize = window.size
 		tree = ET.parse('configs\\menu.xml')
 		root = tree.getroot()
 		if root.tag != "menu":
 			sys.exit("Menu file is incorrect")
 		backgroundImageName = root.attrib.get("background")
 		self._backgroundImage = sf.Sprite(sf.Texture.from_file("images\\" + backgroundImageName))
-		startPosition_x = self._window.width/2.6
-		startPosition_y = self._window.height/3
+		self._backgroundImage.scale((self._window.size.x/float(self._backgroundImage.texture.width), self._window.size.y/float(self._backgroundImage.texture.height)))
+		startPosition_x = self._window.view.size.x/ZOOM/2.6
+		startPosition_y = self._window.view.size.y/ZOOM/3
 		dY = 0
 		for child in root:
 			infoPortion = child.attrib.get("infoPortion")
@@ -89,9 +91,9 @@ class Menu:
 				self._window.close()
 			if type(event) is sf.ResizeEvent:
 				#self._backgroundImage.scale((self._window.size.x/float(self._oldWindowSize.x), self._window.size.y/float(self._oldWindowSize.y)))
-				self._oldWindowSize = self._window.size
-				startPosition_x = self._window.width/2.6
-				startPosition_y = self._window.height/3
+				#self._oldWindowSize = self._window.size
+				startPosition_x = self._window.view.size.x/2.6
+				startPosition_y = self._window.view.size.y/3
 				dY = 0
 				for item in self._items:
 					position = sf.Vector2(startPosition_x, startPosition_y + dY)
@@ -106,7 +108,7 @@ class Menu:
 					self.DoAction(item.GetAction())
 	def Start(self):
 		self._view = self._window.view
-		self._window.view.reset(sf.Rectangle((0, 0), (self._window.size.x, self._window.size.y)))
+		self._window.view.reset(sf.Rectangle((0, 0), (self._window.width, self._window.height)))
 		self._started = True
 	def Stop(self):
 		self._started = False
@@ -139,4 +141,4 @@ class Menu:
 	_game = None
 	_view = None
 	_backgroundImage = None
-	_oldWindowSize = None
+	#_oldWindowSize = None

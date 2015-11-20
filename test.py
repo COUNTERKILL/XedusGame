@@ -10,7 +10,7 @@ mode = sf.VideoMode(1024, 768)
 window = sf.RenderWindow(mode, "pySFML Window", sf.window.Style.TITLEBAR)# sf.window.Style.FULLSCREEN)
 view = sf.View()
 view.reset(sf.Rectangle((0, 0), (window.size.x, window.size.y)))
-view.zoom(2)
+view.zoom(ZOOM)
 window.view = view
 window.framerate_limit = 60
 #sfml.window.Style.FULLSCREEN
