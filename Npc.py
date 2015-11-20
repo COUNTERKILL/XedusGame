@@ -1,8 +1,8 @@
 from live import Live
-import IniFile as ini
+import iniFile as ini
 from way import Way
 import sfml as sf
-from Object import Position
+from object import Position
 from walker import Walker
 
 FRIEND = 1

@@ -1,11 +1,11 @@
 import sfml as sf
 from sfml.graphics import RenderStates, BlendMode
-import IniFile as ini
-import Object as ob
+import iniFile as ini
+import object as ob
 import os
-import Physics as Phys
-import Player
-import AnimatedObject as ao
+import physics as Phys
+import player
+import animatedObject as ao
                                                           
 class Location(sf.Drawable):
 	def __init__(self, locIniPath):

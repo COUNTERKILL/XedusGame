@@ -1,5 +1,5 @@
 import sfml as sf
-from Location import * 
+from location import * 
 
 # create the main window
 window = sf.RenderWindow(sf.VideoMode(640, 480), "pySFML Window")

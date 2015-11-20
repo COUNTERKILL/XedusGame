@@ -1,8 +1,8 @@
 import sfml as sf
-import Player
-from Location import *
-from Object import Position
-import AnimatedObject 
+import player
+from location import *
+from object import Position
+import animatedObject 
 
 def RechangeView(window):
 	step = sf.Vector2(0, 0)
@@ -23,7 +23,7 @@ view = sf.View()
 view.reset(sf.Rectangle((0, 0), (640, 480)))
 view.zoom(2)
 window.view = view
-player = Player.Player("configs\\player.ini")
+player = player.Player("configs\\player.ini")
 loc = Location("locations\\test_loc\\redactor_loc.ini")
 # start the game loop
 obj=None

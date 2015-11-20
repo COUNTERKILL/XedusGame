@@ -1,8 +1,8 @@
 import sfml as sf
 import time
-import IniFile as ini
-import Object as obj
-import Animation as ani
+import iniFile as ini
+import object as obj
+import animation as ani
 
 class AnimatedObject(obj.Object):
 	def __init__(self,ObjIniPath):

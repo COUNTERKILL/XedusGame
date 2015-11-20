@@ -1,5 +1,5 @@
 from logicObject import LogicObject
-import IniFile as ini
+import iniFile as ini
 import sfml as sf
 import random
 from musiccollection import musicCollection

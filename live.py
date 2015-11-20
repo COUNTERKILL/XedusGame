@@ -1,5 +1,5 @@
 from logicObject import LogicObject
-import Physics as Phys
+import physics as Phys
 
 class Live(LogicObject):
 	def __init__(self, simulation, object):

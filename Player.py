@@ -1,9 +1,9 @@
-import AnimatedObject as ao
+import animatedObject as ao
 import sfml as sf
-import Location as loc
-import Physics as Phys
-import IniFile as ini
-import Object as obj
+import location as loc
+import physics as Phys
+import iniFile as ini
+import object as obj
 
 STEP_SIZE = 2
 

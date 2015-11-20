@@ -1,7 +1,7 @@
 from anomaly import Anomaly
 from npc import Npc
 from walker import Walker
-import IniFile as ini
+import iniFile as ini
 from logicPlayer import LogicPlayer
 from live import Live
 

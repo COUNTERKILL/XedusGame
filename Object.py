@@ -1,5 +1,5 @@
 import sfml as sf
-import IniFile as ini
+import iniFile as ini
 import os
 TYPE_INTERACTION_PHYSICAL=0
 TYPE__INTERACTION_VISUAL=1

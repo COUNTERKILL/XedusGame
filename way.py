@@ -1,5 +1,5 @@
-import IniFile as ini
-import Object as obj
+import iniFile as ini
+import object as obj
 class WayPoint:
     def __init__(self,position,animation):
         self._position=position
@@ -12,8 +12,8 @@ class WayPoint:
         return self._position
     def GetAnimation(self):
         return self._animation
-	_animation = None
-	_position = None
+    _animation = None
+    _position = None
     
 class Way:
     def __init__(self,LogicFileName):
