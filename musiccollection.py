@@ -11,7 +11,7 @@ class MusicCollection:
             Music={}
             for j in range(0,music_count):
                 Music[IniReader.ReadString("music"+str(music_index),"name")] \
-                =sf.Music.from_file \
+                =sf.Music.from_file\
                 (IniReader.ReadString("music"+str(music_index),"path")) 
                 music_index+=1
             self._collection[IniReader.ReadString("group"+str(i),"name")]=Music
@@ -27,8 +27,11 @@ class MusicCollection:
 
         
         
+<<<<<<< HEAD
 musicCollection = MusicCollection("configs\\music.ini")
         
         
+=======
+>>>>>>> 93f4c17275b51d56e497b3d7bfad42b98c504193
         
     
