@@ -74,6 +74,7 @@ class Menu:
 			item = MenuItem(self._window, infoPortion, action, text, position)
 			self._items.append(item)
 		self._music = musicCollection.GetMusicByName("MENU")
+		self._music.loop = True
 		self._started = False
 	def DrawFrame(self):
 		if not self._started:

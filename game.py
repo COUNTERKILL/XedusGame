@@ -30,6 +30,7 @@ class Game:
 		if not self._started:
 			return
 		self.ProcessKey()
+		self.UpdateMusic()
 		if not self._simulator.IsGameOver():
 			self._simulator.ProcessFrame()
 		self._window.draw(self._location)
@@ -68,6 +69,10 @@ class Game:
 		self._started = False
 	def SetMenu(self, menu):
 		self._menu = menu
+	def UpdateMusic(self):
+		if self._music.status == sf.audio.SoundSource.STOPPED:
+			self._music = musicCollection.GetRandomInGroup("AMBIENT")
+			self._music.start()
 	_window = None
 	_player = None
 	_started = False
