@@ -44,6 +44,8 @@ class Simulator:
 			self._isGameOver = True
 	def IsGameOver(self):
 		return self._isGameOver
+	def GetPlayer(self):
+		return self._player
 	_logicObjects = None
 	_player = None
 	_location = None

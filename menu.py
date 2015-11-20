@@ -17,7 +17,7 @@ class MenuItem:
 		self._textObj.position = position
 		self._textObj.character_size = 24
 		self._width = self._textObj.local_bounds.width
-		self.height = self._textObj.local_bounds.height
+		self._height = self._textObj.local_bounds.height
 	def GetText(self):
 		return self._text
 	def GetTextObject(self):
@@ -34,7 +34,7 @@ class MenuItem:
 		mousePos = sf.Mouse.get_position(self._window) - self._window.view.viewport.position
 		#mousePos = self._window.convert_coords(mousePos)
 		#print(mousePos)
-		if (mousePos.x > self._position.x) and (mousePos.x < (self._position.x + self._width)) and (mousePos.y > self._position.y) and (mousePos.y < (self._position.y + self.height)):
+		if (mousePos.x > self._position.x) and (mousePos.x < (self._position.x + self._width)) and (mousePos.y > self._position.y) and (mousePos.y < (self._position.y + self._height)):
 			return True
 		return False
 	_infoPortion = None

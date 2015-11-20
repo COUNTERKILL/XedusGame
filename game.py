@@ -3,6 +3,7 @@ from Player import *
 from Location import *
 from Object import Position
 from simulator import Simulator
+from hud import Hud
 
 class Game:
 	def __init__(self, window, menu = None):
@@ -22,6 +23,7 @@ class Game:
 		self._gameOverText.color = sf.Color.WHITE
 		self._gameOverText.character_size = 150
 		self._music = sf.Music.from_file("garbage_day.ogg")
+		self._hud = Hud(window, self._simulator.GetPlayer())
 	def DrawFrame(self):
 		if not self._started:
 			return
@@ -32,6 +34,7 @@ class Game:
 		if self._simulator.IsGameOver():
 			self._gameOverText.position = sf.Vector2(self._window.view.center.x - 300, self._window.view.center.y - self._window.height*0.2)
 			self._window.draw(self._gameOverText)
+		self._window.draw(self._hud)
 	def ProcessKey(self):
 		step = Position(0, 0)
 		for event in self._window.events:
