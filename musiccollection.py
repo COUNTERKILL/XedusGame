@@ -15,10 +15,8 @@ class MusicCollection:
                 (IniReader.ReadString("music"+str(music_index),"path")) 
                 music_index+=1
             self._collection[IniReader.ReadString("group"+str(i),"name")]=Music
-    def GetMusicByName(self,name):
-        for key in self._collection.keys():
-            if name in self._collection[key].keys():
-                return self._collection[key][name]
+    def GetMusic(self,group,name):
+        return self._collection[group][name]
     def GetRandomInGroup(self,group):
         return random.choice(self._collection[group].values())
     def AddMusic(self,group,name,path):
@@ -26,8 +24,9 @@ class MusicCollection:
     _collection={}
 
         
-        
-musicCollection = MusicCollection("configs\\music.ini")
+if __name__=="__main__":        
+    musicCollection = MusicCollection("configs\\music.ini")
+    sf.Music.play(musicCollection.GetMusic("ANOMALIES","ELECTRA_ACTIVE"))
         
         
     
