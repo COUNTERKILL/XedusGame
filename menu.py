@@ -52,6 +52,7 @@ class Menu:
 			self._game = game
 			game.SetMenu(self)
 		self._window = window
+		self._oldWindowSize = window.size
 		tree = ET.parse('configs\\menu.xml')
 		root = tree.getroot()
 		if root.tag != "menu":
@@ -86,13 +87,26 @@ class Menu:
 			# close window: exit
 			if type(event) is sf.CloseEvent:
 				self._window.close()
+			if type(event) is sf.ResizeEvent:
+				#self._backgroundImage.scale((self._window.size.x/float(self._oldWindowSize.x), self._window.size.y/float(self._oldWindowSize.y)))
+				self._oldWindowSize = self._window.size
+				startPosition_x = self._window.width/2.6
+				startPosition_y = self._window.height/3
+				dY = 0
+				for item in self._items:
+					position = sf.Vector2(startPosition_x, startPosition_y + dY)
+					dY += 50
+					item._position = position
+					item._width = item._textObj.local_bounds.width
+					item.height = item._textObj.local_bounds.height
+					#item._textObj.position = position
 		if sf.Mouse.is_button_pressed(sf.Mouse.LEFT):
 			for item in self._items:
 				if self.CheckInfoPortion(item.GetInfoPortion()) and item.UnderMouse():
 					self.DoAction(item.GetAction())
 	def Start(self):
 		self._view = self._window.view
-		self._window.view.reset(sf.Rectangle((0, 0), (1024, 768)))
+		self._window.view.reset(sf.Rectangle((0, 0), (self._window.size.x, self._window.size.y)))
 		self._started = True
 	def Stop(self):
 		self._started = False
@@ -125,3 +139,4 @@ class Menu:
 	_game = None
 	_view = None
 	_backgroundImage = None
+	_oldWindowSize = None

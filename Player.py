@@ -5,7 +5,7 @@ import Physics as Phys
 import IniFile as ini
 import Object as obj
 
-STEP_SIZE = 1
+STEP_SIZE = 2
 
 class Player(ao.AnimatedObject):
 	def __init__(self, IniPath):

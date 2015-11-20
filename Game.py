@@ -20,8 +20,7 @@ class Game:
 		self._gameOverText = sf.Text("Game over!")
 		self._gameOverText.font = font
 		self._gameOverText.color = sf.Color.WHITE
-		self._gameOverText.position = sf.Vector2(self._window.view.center.x - self._window.width*0.7, self._window.view.center.y - self._window.width*0.5)
-		self._gameOverText.character_size = 100
+		self._gameOverText.character_size = 150
 		self._music = sf.Music.from_file("garbage_day.ogg")
 	def DrawFrame(self):
 		if not self._started:
@@ -31,6 +30,7 @@ class Game:
 			self._simulator.ProcessFrame()
 		self._window.draw(self._location)
 		if self._simulator.IsGameOver():
+			self._gameOverText.position = sf.Vector2(self._window.view.center.x - 300, self._window.view.center.y - self._window.height*0.2)
 			self._window.draw(self._gameOverText)
 	def ProcessKey(self):
 		step = Position(0, 0)

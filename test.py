@@ -3,27 +3,18 @@ import sfml as sf
 from game import *
 from menu import *
 
+modes = sf.VideoMode.get_fullscreen_modes()
+mode = modes[9]
+
 # create the main window
-window = sf.RenderWindow(sf.VideoMode(1024, 768), "pySFML Window")
+window = sf.RenderWindow(mode, "pySFML Window", sf.window.Style.TITLEBAR)# sf.window.Style.FULLSCREEN)
 view = sf.View()
-view.reset(sf.Rectangle((0, 0), (1024, 768)))
+view.reset(sf.Rectangle((0, 0), (window.size.x, window.size.y)))
 view.zoom(2)
 window.view = view
-try:
-	# load a sprite to display
-	texture = sf.Texture.from_file("tex.jpg", sf.Rectangle((0, 0), (200, 120)))
-	sprite = sf.Sprite(texture)
-	sprite.texture_rectangle = sf.Rectangle((0, 0), (100, 80))
-	sprite.color = sf.Color(255, 255, 255, 200)
-	sprite.position = sf.Vector2(400, 400)
+window.framerate_limit = 60
+#sfml.window.Style.FULLSCREEN
 
-	# create some graphical text to display
-	font = sf.Font.from_file("airborne.ttf")
-	text = sf.Text("Hello SFML", font, 50)
-
-except IOError:
-	print("Error")
-	exit(1)
 menu = Menu(window)
 menu.Start()
 # start the game loop
