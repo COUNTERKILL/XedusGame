@@ -3,9 +3,9 @@ import sfml as sf
 from game import *
 from menu import *
 
-modes = sf.VideoMode.get_fullscreen_modes()
-mode = modes[9]
-
+#modes = sf.VideoMode.get_fullscreen_modes()
+#mode = modes[9]
+mode = sf.VideoMode(1024, 768)
 # create the main window
 window = sf.RenderWindow(mode, "pySFML Window", sf.window.Style.TITLEBAR)# sf.window.Style.FULLSCREEN)
 view = sf.View()
