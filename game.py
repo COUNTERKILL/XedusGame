@@ -51,13 +51,13 @@ class Game:
 		if self._simulator.IsGameOver():
 			return
 		self._player.SetView()
-		if sf.Keyboard.is_key_pressed(sf.Keyboard.LEFT):
+		if sf.Keyboard.is_key_pressed(sf.Keyboard.A):
 			step.x=-1*STEP_SIZE
-		if sf.Keyboard.is_key_pressed(sf.Keyboard.RIGHT):
+		if sf.Keyboard.is_key_pressed(sf.Keyboard.D):
 			step.x=STEP_SIZE
-		if sf.Keyboard.is_key_pressed(sf.Keyboard.UP):
+		if sf.Keyboard.is_key_pressed(sf.Keyboard.W):
 			step.y=-1*STEP_SIZE
-		if sf.Keyboard.is_key_pressed(sf.Keyboard.DOWN):
+		if sf.Keyboard.is_key_pressed(sf.Keyboard.S):
 			step.y=STEP_SIZE
 		self._player.Move(step)
 		self._window.view.center = sf.Vector2(self._player._position.x, self._player._position.y)
