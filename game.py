@@ -13,7 +13,7 @@ class Game:
 			menu.SetGame(self)
 		self._window = window
 		self._initialized = True
-		self._player = Player("configs\\player.ini")
+		self._player = Player("configs\\player.ini", window)
 		self._location = Location("locations\\test_loc\\location.ini")
 		self._location.AddObject(self._player, 0)
 		self._player.SetPosition(self._location.GetPlayerStartPosition())
@@ -50,6 +50,7 @@ class Game:
 			return
 		if self._simulator.IsGameOver():
 			return
+		self._player.SetView()
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.LEFT):
 			step.x=-1*STEP_SIZE
 		if sf.Keyboard.is_key_pressed(sf.Keyboard.RIGHT):

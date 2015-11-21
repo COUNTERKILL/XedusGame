@@ -69,6 +69,11 @@ class Object(sf.Drawable):
 		return self._height
 	def GetLogicFileName(self):
 		return self._logicFileName
+	def SetRotation(self, angle):
+		self._sprite.origin=sf.Vector2(self._width/2, self._height/2)
+		self._sprite.rotation = angle
+	def GetRotation(self):
+		return self._sprite.rotation
 	_position=Position(0,0)
 	_obj_id = None
 	_type_interaction = None

@@ -3,6 +3,7 @@ import iniFile as ini
 import sfml as sf
 import random
 from musiccollection import musicCollection
+from logicPlayer import LogicPlayer
 
 class Anomaly(LogicObject):
 	def __init__(self, simulation, object):
@@ -17,6 +18,9 @@ class Anomaly(LogicObject):
 		if self._clock.elapsed_time.milliseconds < self._temeReloading:
 			return
 		live.SetHealth(live.GetHealth() - random.randint(self._damage*0.2, self._damage*1.5))
+		if issubclass(live.__class__, LogicPlayer):
+			music = musicCollection.GetMusic("ACTOR", "HIT")
+			music.play()
 		self.Activate()
 	def Activate(self):
 		self._clock.restart()

@@ -4,6 +4,7 @@ from walker import Walker
 import iniFile as ini
 from logicPlayer import LogicPlayer
 from live import Live
+from musiccollection import musicCollection
 
 class Simulator:
 	def __init__(self, location):
@@ -42,6 +43,10 @@ class Simulator:
 							logicObjectIter.ActivateTo(logicObject)
 		if self._player.GetHealth()==0:
 			self._isGameOver = True
+			music = musicCollection.GetMusic("ACTOR", "DIE")
+			music.play()
+			self._player._object.SetAnimation("DIE")
+			self._player._object.SetNextAnimation("DIED")
 	def IsGameOver(self):
 		return self._isGameOver
 	def GetPlayer(self):
