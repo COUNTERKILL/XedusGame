@@ -41,6 +41,7 @@ class Player(ao.AnimatedObject):
 				music.stop()
 		else:
 			self._stopCounter = 0
+			self.SetAnimation("WALK")
 			self.StartAnimate()
 			music = musicCollection.GetMusic("ACTOR", "STEP")
 			if music.status == sf.audio.SoundSource.STOPPED and self._stepBetweenTime.elapsed_time.seconds > 0.4:
