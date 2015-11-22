@@ -2,8 +2,8 @@ from logicObject import LogicObject
 import physics as Phys
 
 class Live(LogicObject):
-	def __init__(self, simulation, object):
-		LogicObject.__init__(self, simulation, object)
+	def __init__(self, objectLogicPath, object):
+		LogicObject.__init__(self, objectLogicPath, object)
 		self._health = 100
 	def GetHealth(self):
 		return self._health

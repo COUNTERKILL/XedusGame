@@ -11,21 +11,21 @@ class Simulator:
 		self._logicObjects = []
 		self._location = location
 		for object in location._objects:
+			logicFileName = object.GetLogicFileName()
+			objectLogicPath = location.GetLocationIniDir() + "\\logics\\" + logicFileName
 			logicObject = None
 			if type(object).__name__ == "Player":
-				logicObject = LogicPlayer(self, object)
+				logicObject = LogicPlayer(objectLogicPath, object)
 				self._player = logicObject
 				self._logicObjects.append(logicObject)
 				print("Player is finded on location")
 				continue
-			logicFileName = object.GetLogicFileName()
-			objectLogicPath = location.GetLocationIniDir() + "\\logics\\" + logicFileName
 			configFile=ini.IniFile(objectLogicPath)
 			unit_type = configFile.ReadString("logic", "type")
 			if unit_type == "npc":
-				logicObject = Npc(self, object)
+				logicObject = Npc(objectLogicPath, object)
 			if unit_type == "anomaly":
-				logicObject = Anomaly(self, object)
+				logicObject = Anomaly(objectLogicPath,object)
 				logicObject._object.SetAnimation("PASSIVE")
 			if logicObject == None:
 				print("Object time not defined: " + unit_type)

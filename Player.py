@@ -8,6 +8,7 @@ from musiccollection import musicCollection
 import math
 
 STEP_SIZE = 2
+TIME_BETWEEN_STEPS = 0.4
 
 class Player(ao.AnimatedObject):
 	def __init__(self, IniPath, window):
@@ -44,7 +45,7 @@ class Player(ao.AnimatedObject):
 			self.SetAnimation("WALK")
 			self.StartAnimate()
 			music = musicCollection.GetMusic("ACTOR", "STEP")
-			if music.status == sf.audio.SoundSource.STOPPED and self._stepBetweenTime.elapsed_time.seconds > 0.4:
+			if music.status == sf.audio.SoundSource.STOPPED and self._stepBetweenTime.elapsed_time.seconds > TIME_BETWEEN_STEPS:
 				self._stepBetweenTime.restart()
 				music.volume = 50
 				music.play()

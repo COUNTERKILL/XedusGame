@@ -17,6 +17,7 @@ class WayPoint:
     
 class Way:
     def __init__(self,LogicFileName):
+        self._currentWayPointIndex = 0
         IniReader=ini.IniFile(LogicFileName)
         points_count=IniReader.ReadInt("way","points_count")
         self._ways=[]
@@ -26,11 +27,11 @@ class Way:
                                             IniReader.ReadString("way_point"+str(i),"animation"))
             self._ways.append(way_point)
         self._currentWayPoint=self._ways[0]
-    def GetWayPoint(self):
+    def GetPreviousWayPoint(self):
         return self._ways[self._currentWayPointIndex]      
     def GetNextWayPoint(self):
         if len(self._ways)-1 == self._currentWayPointIndex:
-            return 0
+            return self._ways[0]
         else:
             return self._ways[self._currentWayPointIndex+1]
     def ChangeToNextWayPoint(self):

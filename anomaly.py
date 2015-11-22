@@ -6,10 +6,9 @@ from musiccollection import musicCollection
 from logicPlayer import LogicPlayer
 
 class Anomaly(LogicObject):
-	def __init__(self, simulation, object):
-		LogicObject.__init__(self, simulation, object)
+	def __init__(self, objectLogicPath, object):
+		LogicObject.__init__(self, objectLogicPath, object)
 		logicFileName = object.GetLogicFileName()
-		objectLogicPath = self._simulator._location.GetLocationIniDir() + "\\logics\\" + logicFileName
 		configFile=ini.IniFile(objectLogicPath)
 		self._damage = configFile.ReadInt("anomaly", "damage")
 		self._temeReloading = configFile.ReadInt("anomaly", "time_reloading")

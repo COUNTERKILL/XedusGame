@@ -1,6 +1,5 @@
 from live import Live
 import iniFile as ini
-from way import Way
 import sfml as sf
 from object import Position
 from walker import Walker
@@ -29,11 +28,10 @@ def SetRelation(group1,group2,value):
 	iniReader.Write(group1,group2,value)
 	
 class Npc(Live, Walker):
-	def __init__(self, simulation, object):
-		Live.__init__(self, simulation, object)
-		Walker.__init__(object)
+	def __init__(self, objectLogicPath, object):
+		Live.__init__(self,objectLogicPath, object)
+		Walker.__init__(self, objectLogicPath, object)
 		logicFileName = object.GetLogicFileName()
-		objectLogicPath = object.GetLocationIniDir() + "\\logics\\" + logicFileName
 		configFile=ini.IniFile(objectLogicPath)
 		configFile.ReadString("npc", "group")
 		self.SetHealth(configFile.ReadInt("npc", "health"))
