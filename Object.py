@@ -39,7 +39,8 @@ class Position:
         y = None
                 
 class Object(sf.Drawable):
-	def __init__(self, ObjIniPath):
+	def __init__(self, ObjIniPath, location):
+		self._location = location
 		load=ini.IniFile(ObjIniPath)
 		iniDir = os.path.dirname(ObjIniPath)
 		self._width=load.ReadInt("Object","width")
@@ -74,7 +75,12 @@ class Object(sf.Drawable):
 		self._sprite.rotation = angle
 	def GetRotation(self):
 		return self._sprite.rotation
+	def Move(self, step):
+		self.SetPosition(self._position + step)
+		if self._location.CollideTo(self):
+			self.SetPosition(self._position - step)
 	_position=Position(0,0)
+	_location = None
 	_obj_id = None
 	_type_interaction = None
 	_type_logic = None

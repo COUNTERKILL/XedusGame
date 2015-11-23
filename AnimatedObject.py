@@ -5,8 +5,8 @@ import object as obj
 import animation as ani
 
 class AnimatedObject(obj.Object):
-	def __init__(self,ObjIniPath):
-		obj.Object.__init__(self, ObjIniPath)
+	def __init__(self, ObjIniPath, location):
+		obj.Object.__init__(self, ObjIniPath, location)
 		load=ini.IniFile(ObjIniPath)
 		animation_count=load.ReadInt("animation","count")
 		frameInd = 0

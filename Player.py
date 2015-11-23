@@ -11,8 +11,8 @@ STEP_SIZE = 2
 TIME_BETWEEN_STEPS = 0.4
 
 class Player(ao.AnimatedObject):
-	def __init__(self, IniPath, window):
-		ao.AnimatedObject.__init__(self, IniPath)
+	def __init__(self, IniPath, window, location):
+		ao.AnimatedObject.__init__(self, IniPath, location)
 		self.StartAnimate()
 		self._clock=sf.Clock()
 		self._stepBetweenTime = sf.Clock()
@@ -21,11 +21,6 @@ class Player(ao.AnimatedObject):
 		if self._clock.elapsed_time < sf.milliseconds(5):
 			return
 		self._clock.restart()
-		self._position.x += step.x
-		self._position.y += step.y
-		if self._location.CollideTo(self):
-			self._position.x -= step.x
-			self._position.y -= step.y
 		if self._position.x < 0:
 			self._position.x = 0
 		if self._position.y < 0:
@@ -41,6 +36,7 @@ class Player(ao.AnimatedObject):
 				music = musicCollection.GetMusic("ACTOR", "STEP")
 				music.stop()
 		else:
+			obj.Object.Move(self, step)
 			self._stopCounter = 0
 			self.SetAnimation("WALK")
 			self.StartAnimate()

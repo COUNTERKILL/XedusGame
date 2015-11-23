@@ -13,8 +13,8 @@ class Game:
 			menu.SetGame(self)
 		self._window = window
 		self._initialized = True
-		self._player = Player("configs\\player.ini", window)
 		self._location = Location("locations\\test_loc\\location.ini")
+		self._player = Player("configs\\player.ini", window, self._location)
 		self._location.AddObject(self._player, 0)
 		self._player.SetPosition(self._location.GetPlayerStartPosition())
 		self._simulator = Simulator(self._location)

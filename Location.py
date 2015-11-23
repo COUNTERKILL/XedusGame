@@ -25,9 +25,9 @@ class Location(sf.Drawable):
 			objTypeReader=ini.IniFile(iniDir + '\\' + 'objects\\'+objName)
 			objType=(objTypeReader.ReadString("Object","type"))
 			if objType=="animated":
-				self._objects.append(ao.AnimatedObject(iniDir + '\\' + 'objects\\'+objName))
+				self._objects.append(ao.AnimatedObject(iniDir + '\\' + 'objects\\'+objName, self))
 			else:
-				self._objects.append(ob.Object(iniDir + '\\' + 'objects\\'+objName))
+				self._objects.append(ob.Object(iniDir + '\\' + 'objects\\'+objName, self))
 			pos = ob.Position(load.ReadInt("Object"+str(i), "pos_x"), load.ReadInt("Object"+str(i), "pos_y"))
 			self._objects[len(self._objects)-1].SetPosition(pos)
 			self._objects[len(self._objects)-1].SetLayer(load.ReadInt("Object"+str(i), "layer"))
@@ -49,9 +49,10 @@ class Location(sf.Drawable):
 			target.draw(obj)
 	def CollideTo(self, obj):
 		for object in self._objects:
-			if (object.GetTypeInteraction()==ob.TYPE_INTERACTION_PHYSICAL):
-				if (object.GetLayer()==obj.GetLayer()) and Phys.Collide(obj, object):
-					return True
+			if not obj is object:
+				if (object.GetTypeInteraction()==ob.TYPE_INTERACTION_PHYSICAL and obj.GetTypeInteraction()==ob.TYPE_INTERACTION_PHYSICAL):
+					if (object.GetLayer()==obj.GetLayer()) and Phys.Collide(obj, object):
+						return True
 		return False
 	def GetWidth(self):
 		return self._width
