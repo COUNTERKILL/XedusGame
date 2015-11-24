@@ -14,6 +14,7 @@ class IniFile:
 					continue
 				if sectionFinded == True:			
 					if line[0]=='[':
+						print ("Parametr " + paramName + " couldn't found in section " + sectionName + " in file " + self._fileName)
 						return "Default"
 					else:
 						if paramName == line[0:line.find('=')]:
@@ -22,6 +23,7 @@ class IniFile:
 							if '\n' in value:
 								value = value[0:-1]
 							return value
+		print ("Parametr " + paramName + " couldn't found in section " + sectionName + " in file " + self._fileName)
 		return "Default"
 	_fileName=None
 

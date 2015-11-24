@@ -12,6 +12,7 @@ class Anomaly(LogicObject):
 		configFile=ini.IniFile(objectLogicPath)
 		self._damage = configFile.ReadInt("anomaly", "damage")
 		self._temeReloading = configFile.ReadInt("anomaly", "time_reloading")
+		self._music = musicCollection.GetMusic("ANOMALIES", configFile.ReadString("anomaly", "music_active"))
 		self._clock = sf.Clock()
 	def ActivateTo(self, live):
 		if self._clock.elapsed_time.milliseconds < self._temeReloading:
@@ -24,9 +25,10 @@ class Anomaly(LogicObject):
 	def Activate(self):
 		self._clock.restart()
 		self._object.SetAnimation("ACTIVE")
-		self._music = musicCollection.GetMusic("ANOMALIES", "ELECTRA_ACTIVE")
+		
 		self._music.play()
 		self._object.SetNextAnimation("PASSIVE")
 	_damage = None
 	_temeReloading = None
 	_clock = None
+	_music = None
