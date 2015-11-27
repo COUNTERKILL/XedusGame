@@ -7,6 +7,8 @@ import animation as ani
 class AnimatedObject(obj.Object):
 	def __init__(self, ObjIniPath, location):
 		obj.Object.__init__(self, ObjIniPath, location)
+		self._animations = {}
+		self._rotationAngle = 0
 		load=ini.IniFile(ObjIniPath)
 		animation_count=load.ReadInt("animation","count")
 		frameInd = 0
@@ -38,8 +40,8 @@ class AnimatedObject(obj.Object):
 		self._currentAnimation.Start()
 	def SetNextAnimation(self, animationName):
 		self._nextAnimation = animationName
-	_rotationAngle = 0
-	_animations={}
+	_rotationAngle = None
+	_animations=None
 	_currentAnimation = None
 	_nextAnimation = None
         
