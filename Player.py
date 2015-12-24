@@ -7,7 +7,7 @@ import object as obj
 from musiccollection import musicCollection
 import math
 
-STEP_SIZE = 2
+STEP_SIZE = 4
 TIME_BETWEEN_STEPS = 0.4
 
 class Player(ao.AnimatedObject):
@@ -18,7 +18,7 @@ class Player(ao.AnimatedObject):
 		self._stepBetweenTime = sf.Clock()
 		self._window = window
 	def Move(self,step):
-		if self._clock.elapsed_time < sf.milliseconds(5):
+		if self._clock.elapsed_time < sf.milliseconds(10):
 			return
 		self._clock.restart()
 		if self._position.x < 0:

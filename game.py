@@ -17,7 +17,7 @@ class Game:
 		self._player = Player("configs\\player.ini", window, self._location)
 		self._location.AddObject(self._player, 0)
 		self._player.SetPosition(self._location.GetPlayerStartPosition())
-		self._simulator = Simulator(self._location)
+		self._simulator = Simulator(self._location, window)
 		font = sf.Font.from_file("arial.ttf")
 		self._gameOverText = sf.Text("Game over!")
 		self._gameOverText.font = font
@@ -61,6 +61,9 @@ class Game:
 			step.y=STEP_SIZE
 		self._player.Move(step)
 		self._window.view.center = sf.Vector2(self._player._position.x, self._player._position.y)
+		if sf.Mouse.is_button_pressed(sf.Mouse.LEFT):
+			self._simulator.Fire()
+			
 	def Start(self):
 		self._window.view.center = sf.Vector2(self._player._position.x, self._player._position.y)
 		self._music.play()

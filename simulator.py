@@ -5,9 +5,15 @@ import iniFile as ini
 from logicPlayer import LogicPlayer
 from live import Live
 from musiccollection import musicCollection
+from object import Position
+import sfml as sf
+
+ZOOM = 2
+TIME_BETWEEN_FIRES = 0.1
 
 class Simulator:
-	def __init__(self, location):
+	def __init__(self, location, window):
+		self._window = window
 		self._logicObjects = []
 		self._location = location
 		for object in location._objects:
@@ -31,11 +37,16 @@ class Simulator:
 				print("Object time not defined: " + unit_type)
 				continue
 			self._logicObjects.append(logicObject)
+		self._firesBetweenTime = sf.Clock()
 		self._isGameOver = False
 	def ProcessFrame(self):
 		for logicObject in self._logicObjects:
 			if issubclass(logicObject.__class__, Walker):
-				logicObject.Walk()
+				if issubclass(logicObject.__class__, Live):
+					if logicObject.IsLive():
+						logicObject.Walk()
+				else:
+					logicObject.Walk()
 			if issubclass(logicObject.__class__, Live):
 				for logicObjectIter in self._logicObjects:
 					if issubclass(logicObjectIter.__class__, Anomaly):
@@ -51,7 +62,43 @@ class Simulator:
 		return self._isGameOver
 	def GetPlayer(self):
 		return self._player
+	def Fire(self):
+		if self._firesBetweenTime.elapsed_time.seconds > TIME_BETWEEN_FIRES:
+			mousePos = sf.Mouse.get_position(self._window) * ZOOM + self._window.view.center - self._window.view.size / 2 + sf.Vector2(100, 100)
+			music = musicCollection.GetMusic("ACTOR", "FIRE")
+			music.play()
+			
+			for logicObject in self._logicObjects:
+				if issubclass(logicObject.__class__, Live):
+					if not logicObject is self._player:
+						if logicObject.UnderMouse(mousePos):
+							logicObject.SetHealth(logicObject.GetHealth() - 10)
+							if not logicObject.IsLive():
+								logicObject._object.SetAnimation("DIED")
+			self._firesBetweenTime.restart()
+					
+		
+	def GetAngle(self, dPos):
+		dPos.y = dPos.y * (-1)
+		if dPos.x == 0 and dPos.y == 0:
+			return 0
+
+		hypotenuze = math.sqrt(dPos.x * dPos.x + dPos.y * dPos.y)
+		cos = dPos.x / hypotenuze
+		angleBuf = math.degrees(math.acos(cos))
+		sin = dPos.y / hypotenuze
+		
+		if sin >= 0:
+			angle = angleBuf
+		else:
+			angle = -1*angleBuf
+		angle = angle - 90
+		angle = angle * (-1)
+		return angle
+		
 	_logicObjects = None
 	_player = None
 	_location = None
 	_isGameOver = None
+	_window		= None
+	_firesBetweenTime = None
