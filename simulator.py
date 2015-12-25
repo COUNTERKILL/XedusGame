@@ -81,6 +81,7 @@ class Simulator:
 								self._oldMusic = music
 							if not logicObject.IsLive():
 								logicObject._object.SetAnimation("DIED")
+								logicObject._object.SetLayer(1)
 			self._firesBetweenTime.restart()
 					
 		
