@@ -56,8 +56,8 @@ class Simulator:
 			self._isGameOver = True
 			music = musicCollection.GetMusic("ACTOR", "DIE")
 			music.play()
-			self._player._object.SetAnimation("DIE")
-			self._player._object.SetNextAnimation("DIED")
+			self._player._object.SetAnimation("DIED")
+			#self._player._object.SetNextAnimation("DIED")
 	def IsGameOver(self):
 		return self._isGameOver
 	def GetPlayer(self):
@@ -73,6 +73,12 @@ class Simulator:
 					if not logicObject is self._player:
 						if logicObject.UnderMouse(mousePos):
 							logicObject.SetHealth(logicObject.GetHealth() - 10)
+							if not self._oldMusic:
+								self._oldMusic = musicCollection.GetRandomInGroup("NPC_HIT")
+							if self._oldMusic and self._oldMusic.status==sf.SoundStream.STOPPED:
+								music = musicCollection.GetRandomInGroup("NPC_HIT")
+								music.play()
+								self._oldMusic = music
 							if not logicObject.IsLive():
 								logicObject._object.SetAnimation("DIED")
 			self._firesBetweenTime.restart()
@@ -96,6 +102,7 @@ class Simulator:
 		angle = angle * (-1)
 		return angle
 		
+	_oldMusic = None
 	_logicObjects = None
 	_player = None
 	_location = None
